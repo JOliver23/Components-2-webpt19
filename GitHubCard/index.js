@@ -1,22 +1,30 @@
+import axios from 'axios';
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+const cardSection = document.querySelector('.cards')
 
+axios.get("https://api.github.com/users/JOliver23")
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
     data in order to use it to build your component function
 
     Skip to STEP 3.
-*/
 
-/*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
-
+.then(response => {
+  // console.log(response)
+  const newCard = gitCard(response.data)
+  cardSection.appendChild(newCard)
+})
+.catch(err => {
+  console.log('broken req: ', err)
+})
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -28,7 +36,19 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
+
+followersArray.forEach(friend => {
+  axios.get(`https://api.github.com/users/${friend}`)
+  .then(response => {
+    const guestCard = gitCard(response.data)
+    cardSection.appendChild(guestCard)
+    console.log(guestCard)
+  })
+  .catch(err => {
+    console.log('broke friends are no fun', err)
+  })
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -49,7 +69,49 @@ const followersArray = [];
       </div>
     </div>
 */
+const gitCard = (data) => {
+  const card = document.createElement('div')
+  const gitPic = document.createElement('img')
+  const subCard = document.createElement('div')
+  const gitUser = document.createElement('h3')
+  const gitName = document.createElement('p')
+  const gitLoc =document.createElement('p')
+  const gitProf = document.createElement('p')
+  const link = document.createElement('a')
+  const gitFollow = document.createElement('p')
+  const gitLeader = document.createElement('p')
+  const gitBio = document.createElement('p')
 
+  card.appendChild(gitPic)
+  card.appendChild(subCard)
+
+  subCard.appendChild(gitUser)
+  subCard.appendChild(gitName)
+  subCard.appendChild(gitLoc)
+  subCard.appendChild(gitProf)
+  gitProf.appendChild(link)
+  subCard.appendChild(gitFollow)
+  subCard.appendChild(gitLeader)
+  subCard.appendChild(gitBio)
+
+  card.classList.add('card')
+  subCard.classList.add('card-info')
+  gitUser.classList.add('name')
+  gitName.classList.add('username')
+
+  gitPic.src = data.avatar_url
+  gitUser.textContent = data.name
+  gitName.textContent = data.login
+  gitLoc.textContent = `Location: ${data.location}`
+  gitProf.textContent = `Profile: ${data.url}`
+  link.textContent = data.url
+  link.href = data.url
+  gitFollow.textContent = `Followers: ${data.followers}`
+  gitLeader.textContent = `Following: ${data.following}`
+  gitBio.textContent = data.bio
+
+  return card;
+}
 /*
   List of LS Instructors Github username's:
     tetondan

@@ -4,6 +4,8 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+const cardSection = document.querySelector('.cards')
+
 axios.get("https://api.github.com/users/JOliver23")
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -31,7 +33,7 @@ axios.get("https://api.github.com/users/JOliver23")
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -81,7 +83,17 @@ const gitCard = (data) => {
   subCard.classList.add('card-info')
   gitUser.classList.add('name')
   gitName.classList.add('username')
-  
+
+  gitPic.src = data.avatar_url
+  gitUser.textContent = data.name
+  gitName.textContent = data.login
+  gitLoc.textContent = `Location: ${data.location}`
+  gitProf.textContent = `Profile: ${data.url}`
+  link.textContent = data.url
+  link.href = data.url
+  gitFollow.textContent = `Followers: ${data.followers}`
+  gitLeader.textContent = `Following: ${data.following}`
+  gitBio.textContent = data.bio
 
   return card;
 }

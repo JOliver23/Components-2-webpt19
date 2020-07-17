@@ -72,9 +72,16 @@ const gitCard = (data) => {
   subCard.appendChild(gitName)
   subCard.appendChild(gitLoc)
   subCard.appendChild(gitProf)
+  gitProf.appendChild(link)
   subCard.appendChild(gitFollow)
   subCard.appendChild(gitLeader)
   subCard.appendChild(gitBio)
+
+  card.classList.add('card')
+  subCard.classList.add('card-info')
+  gitUser.classList.add('name')
+  gitName.classList.add('username')
+  
 
   return card;
 }

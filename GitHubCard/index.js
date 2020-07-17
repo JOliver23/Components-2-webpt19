@@ -16,6 +16,11 @@ axios.get("https://api.github.com/users/JOliver23")
 */
 .then(response => {
   // console.log(response)
+  const newCard = gitCard(response.data)
+  cardSection.appendChild(newCard)
+})
+.catch(err => {
+  console.log('broken req: ', err)
 })
 /*
   STEP 4: Pass the data received from Github into your function,

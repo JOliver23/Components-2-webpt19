@@ -13,7 +13,7 @@ axios.get("https://api.github.com/users/JOliver23")
     Skip to STEP 3.
 */
 .then(response => {
-  console.log(response)
+  // console.log(response)
 })
 /*
   STEP 4: Pass the data received from Github into your function,
@@ -52,7 +52,22 @@ const followersArray = [];
       </div>
     </div>
 */
+const gitCard = (data) => {
+  const card = document.createElement('div')
+  const gitPic = document.createElement('img')
+  const subCard = document.createElement('div')
+  const gitUser = document.createElement('h3')
+  const gitName = document.createElement('p')
+  const gitLoc =document.createElement('p')
+  const gitProf = document.createElement('p')
+  const link = document.createElement('a')
+  const gitFollow = document.createElement('p')
+  const gitLeader = document.createElement('p')
+  const gitBio = document.createElement('p')
+  
 
+  return card;
+}
 /*
   List of LS Instructors Github username's:
     tetondan

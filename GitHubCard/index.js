@@ -13,6 +13,9 @@ axios.get("https://api.github.com/users/JOliver23")
     data in order to use it to build your component function
 
     Skip to STEP 3.
+
+  STEP 4: Pass the data received from Github into your function,
+    and append the returned markup to the DOM as a child of .cards
 */
 .then(response => {
   // console.log(response)
@@ -22,11 +25,6 @@ axios.get("https://api.github.com/users/JOliver23")
 .catch(err => {
   console.log('broken req: ', err)
 })
-/*
-  STEP 4: Pass the data received from Github into your function,
-    and append the returned markup to the DOM as a child of .cards
-*/
-
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -39,6 +37,18 @@ axios.get("https://api.github.com/users/JOliver23")
 */
 
 const followersArray = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
+
+followersArray.forEach(friend => {
+  axios.get(`https://api.github.com/users/${friend}`)
+  .then(response => {
+    const guestCard = gitCard(response.data)
+    cardSection.appendChild(guestCard)
+    console.log(guestCard)
+  })
+  .catch(err => {
+    console.log('broke friends are no fun', err)
+  })
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.

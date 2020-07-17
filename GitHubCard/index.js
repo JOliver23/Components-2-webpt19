@@ -64,7 +64,17 @@ const gitCard = (data) => {
   const gitFollow = document.createElement('p')
   const gitLeader = document.createElement('p')
   const gitBio = document.createElement('p')
-  
+
+  card.appendChild(gitPic)
+  card.appendChild(subCard)
+
+  subCard.appendChild(gitUser)
+  subCard.appendChild(gitName)
+  subCard.appendChild(gitLoc)
+  subCard.appendChild(gitProf)
+  subCard.appendChild(gitFollow)
+  subCard.appendChild(gitLeader)
+  subCard.appendChild(gitBio)
 
   return card;
 }
